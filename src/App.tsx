@@ -19,7 +19,7 @@ const App = () => {
       easing: "cubicBezier(0.2, 0, 0, 1)",
       translateY: window.innerHeight - 80,
       duration: 400,
-      delay: function (el, i) {
+      delay: function (_el, i) {
         return i * 100;
       },
       autoplay: false,
@@ -169,7 +169,7 @@ const App = () => {
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d95751.55330690488!2d-0.04342107034763032!3d52.13533638051545!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4877d513550fb831%3A0xc59912fbe908b2c2!2sSouth%20Farm!5e0!3m2!1sen!2suk!4v1734875817837!5m2!1sen!2suk"
               width="600"
               height="450"
-              style={{border: '0'}}
+              style={{ border: "0" }}
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
             ></iframe>
