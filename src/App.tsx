@@ -155,7 +155,7 @@ const App = () => {
             <p className="text-xl mb-8 font-bold">
               Wednesday 10th September, 2025
             </p>
-            <div className="w-full relative overflow-hidden flex flex-wrap justify-center gap-4">
+            <div className="w-full relative overflow-hidden flex flex-wrap justify-center gap-4 mb-8">
               <div className="w-[180px] h-[180px] md:w-[280px] md:h-[280px] relative overflow-hidden rounded-full">
                 <img
                   src={image6}
