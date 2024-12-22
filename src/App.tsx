@@ -1,5 +1,5 @@
-import { FormEvent, useEffect, useRef, useState } from "react";
-import anime from "animejs/lib/anime.js";
+import { FormEvent, useEffect, useState } from "react";
+//import anime from "animejs/lib/anime.js";
 import hero from "./assets/hero.png";
 import heroMobile from "./assets/hero-mobile.png";
 import flowerBanner from "./assets/flower-banner.png";
@@ -35,8 +35,7 @@ function getCountdown(targetDate: string) {
 }
 
 const App = () => {
-  const navRef = useRef(null);
-  const [shouldNavAnimate, setShouldNavAnimate] = useState(true);
+  //const [shouldNavAnimate, setShouldNavAnimate] = useState(true);
   const [hasSubmitted, setHasSubmitted] = useState(
     localStorage.getItem("submitted") === "true"
   );
@@ -44,28 +43,27 @@ const App = () => {
   const countdown = getCountdown("2025-09-10");
 
   useEffect(() => {
-    if (navRef.current === null) return;
-    const navAnimation = anime({
-      targets: navRef.current,
-      easing: "cubicBezier(0.2, 0, 0, 1)",
-      translateY: window.innerHeight - 80,
-      duration: 400,
-      delay: function (_el, i) {
-        return i * 100;
-      },
-      autoplay: false,
-    });
+    // const navAnimation = anime({
+    //   targets: navRef.current,
+    //   easing: "cubicBezier(0.2, 0, 0, 1)",
+    //   translateY: window.innerHeight - 80,
+    //   duration: 400,
+    //   delay: function (_el, i) {
+    //     return i * 100;
+    //   },
+    //   autoplay: false,
+    // });
 
-    const handleScroll = () => {
-      if (
-        ((isNotMobile && window.scrollY > window.innerHeight) ||
-          (!isNotMobile && window.scrollY > window.innerHeight / 2)) &&
-        shouldNavAnimate
-      ) {
-        navAnimation.play();
-        setShouldNavAnimate(false);
-      }
-    };
+    // const handleScroll = () => {
+    //   if (
+    //     ((isNotMobile && window.scrollY > window.innerHeight) ||
+    //       (!isNotMobile && window.scrollY > window.innerHeight / 2)) &&
+    //     shouldNavAnimate
+    //   ) {
+    //     navAnimation.play();
+    //     setShouldNavAnimate(false);
+    //   }
+    // };
 
     const handleResize = () => {
       if (window.innerWidth > 800) {
@@ -78,13 +76,13 @@ const App = () => {
 
     window.addEventListener("resize", handleResize);
 
-    window.addEventListener("scroll", handleScroll);
+    //window.addEventListener("scroll", handleScroll);
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      //window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", handleResize);
     };
-  }, [navRef.current]);
+  }, []);
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -153,7 +151,7 @@ const App = () => {
           className="w-full"
           id="home"
           style={{
-            height: isNotMobile ? window.innerHeight : window.innerHeight / 1.6,
+            height: isNotMobile ? window.innerHeight : window.innerHeight / 1.5,
           }}
         />
         <img
