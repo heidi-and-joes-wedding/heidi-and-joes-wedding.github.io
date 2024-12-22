@@ -14,15 +14,34 @@ import image6 from "./assets/us/6.jpeg";
 import video from "./assets/venue-shots.mp4";
 import Section from "./components/Section";
 
+function getCountdown(targetDate: string) {
+  const now = new Date();
+  const target = new Date(targetDate);
+
+  let months =
+    (target.getFullYear() - now.getFullYear()) * 12 +
+    (target.getMonth() - now.getMonth());
+  if (target.getDate() < now.getDate()) {
+    months -= 1;
+  }
+  const futureDate = new Date(now);
+  futureDate.setMonth(now.getMonth() + months);
+  const days = Math.floor(
+    ((target as unknown as number) - (futureDate as unknown as number)) /
+      (1000 * 60 * 60 * 24)
+  );
+
+  return { months, days };
+}
+
 const App = () => {
+  const navRef = useRef(null);
   const [shouldNavAnimate, setShouldNavAnimate] = useState(true);
   const [hasSubmitted, setHasSubmitted] = useState(
     localStorage.getItem("submitted") === "true"
   );
-  const [isNotMobile, setIsNotMobile] = useState(
-    window.innerWidth > 800
-  );
-  const navRef = useRef(null);
+  const [isNotMobile, setIsNotMobile] = useState(window.innerWidth > 800);
+  const countdown = getCountdown("2025-09-10");
 
   useEffect(() => {
     if (navRef.current === null) return;
@@ -49,21 +68,21 @@ const App = () => {
     };
 
     const handleResize = () => {
-      if(window.innerWidth > 800){
-        setIsNotMobile(true)
+      if (window.innerWidth > 800) {
+        setIsNotMobile(true);
       }
-      if(window.innerWidth < 800){
-        setIsNotMobile(false)
+      if (window.innerWidth < 800) {
+        setIsNotMobile(false);
       }
-    }
+    };
 
-    window.addEventListener('resize', handleResize)
+    window.addEventListener("resize", handleResize);
 
     window.addEventListener("scroll", handleScroll);
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener('resize', handleResize)
+      window.removeEventListener("resize", handleResize);
     };
   }, [navRef.current]);
 
@@ -165,7 +184,7 @@ const App = () => {
             <p className="my-4">
               Please join us for our wedding celebration on
             </p>
-            <p className="text-xl mb-8 font-bold">
+            <p className="text-xl font-bold mb-8">
               Wednesday 10th September, 2025
             </p>
             <div className="w-full relative overflow-hidden flex flex-wrap justify-center gap-4 mb-8">
@@ -241,6 +260,10 @@ const App = () => {
                   }}
                 />
               </div>
+              <p className="text-xl">
+                <span className="font-bold">{countdown.months}</span> months and{" "}
+                <span className="font-bold">{countdown.days}</span> days.
+              </p>
             </div>
           </div>
         </Section>
@@ -309,8 +332,8 @@ const App = () => {
           }}
           id="venue"
         >
-           <div className="relative z-10 flex flex-col items-center pt-12 opacity-60">
-          <h1 className="text-3xl md:text-5xl font-bold">Venue</h1>
+          <div className="relative z-10 flex flex-col items-center pt-12 opacity-60">
+            <h1 className="text-3xl md:text-5xl font-bold">Venue</h1>
           </div>
           <video
             src={video}
@@ -323,9 +346,7 @@ const App = () => {
               objectFit: "cover",
               transform: "translate(-50%, -50%)",
             }}
-          >
-            
-          </video>
+          ></video>
         </section>
         <Section backgroundColour="white" id="wedding-day">
           <div className="flex flex-col items-center m-4">
@@ -342,6 +363,13 @@ const App = () => {
               src={isNotMobile ? timeline : timlineMobile}
               alt="wedding day timeline"
             />
+            <p>
+              Unfortunately no children or pets will be able to attend unless
+              expressly permitted.
+            </p>
+            <h2 className="text-2xl md:text-3xl mt-8">Dress code</h2>
+            <p>Gentlemen will wear summer suits, neckwear optional.</p>
+            <p>Ladies will wear summer dresses.</p>
           </div>
         </Section>
         <Section backgroundColour="#818763" id="travel">
@@ -354,6 +382,9 @@ const App = () => {
               Local Taxi's (Royston Taxis, Butlermeltax, Breeze Taxi's, Panther
               Taxis)
             </p>
+            <p className="my-4">
+              Should you choose to drive there is ample parking on site.
+            </p>
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d95751.55330690488!2d-0.04342107034763032!3d52.13533638051545!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4877d513550fb831%3A0xc59912fbe908b2c2!2sSouth%20Farm!5e0!3m2!1sen!2suk!4v1734875817837!5m2!1sen!2suk"
               style={{ border: "0" }}
@@ -362,12 +393,14 @@ const App = () => {
               referrerPolicy="no-referrer-when-downgrade"
             ></iframe>
             <p className="m-4">
-              We have limited accomodation at the venue, so we recommend staying locally. Or in Royston or Cambridge. 
+              We have limited accomodation at the venue, so we recommend staying
+              locally. Or in Royston or Cambridge.
             </p>
           </div>
         </Section>
         <section className="h-screen w-full" />
       </div>
+      <span className="flex w-full justify-end">made by Jose Milneth</span>
     </main>
   );
 };
