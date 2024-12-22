@@ -49,7 +49,7 @@ const App = () => {
     const formData = new FormData(e.target as HTMLFormElement);
 
     await fetch(
-      "https://script.google.com/macros/s/AKfycbwUOn5Ea7kKOUJh-KSq0Ku6soq6hb4ScwjYin0VW8PJ1u7tmakArygIhEoBKIEPIpSK/exec",
+      "https://script.google.com/macros/s/AKfycbyN22QtjlTTvy0VmbHkDlDGNLkKj2GXJVdzxlmAGTJ3Q718SwpJLGU1w5ioOiMjxwIs/exec",
       {
         method: "POST",
         body: formData,
