@@ -260,11 +260,11 @@ const App = () => {
                   }}
                 />
               </div>
-              <p className="text-xl">
+            </div>
+              <p className="text-xl mb-8">
                 <span className="font-bold">{countdown.months}</span> months and{" "}
                 <span className="font-bold">{countdown.days}</span> days.
               </p>
-            </div>
           </div>
         </Section>
         <Section backgroundColour="white" id="rsvp">
