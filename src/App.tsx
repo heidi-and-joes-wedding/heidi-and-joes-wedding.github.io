@@ -144,12 +144,12 @@ const App = () => {
               <label htmlFor="email">Email</label>
               <input type="email" id="email" name="email" />
               <label htmlFor="attending">Attending</label>
-              <select id="attending" name="attendance">
+              <select id="attending" name="attendence">
                 <option value="yes">Yes</option>
                 <option value="no">No</option>
               </select>
               <label htmlFor="dietary-requirements">Dietary Requirements</label>
-              <input type="text" id="dietary-requirements" name="dietry" />
+              <input type="text" id="dietary-requirements" name="dietary" />
               <button type="submit">Submit</button>
             </form>
           </div>
