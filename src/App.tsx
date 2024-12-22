@@ -3,11 +3,22 @@ import anime from "animejs/lib/anime.js";
 import hero from "./assets/hero.png";
 import heroMobile from "./assets/hero-mobile.png";
 import flowerBanner from "./assets/flower-banner.png";
+import timlineMobile from "./assets/timeline-mobile.jpeg";
+import timeline from "./assets/timeline-desktop.jpeg";
+import image1 from "./assets/us/1.jpeg";
+import image2 from "./assets/us/2.jpeg";
+import image3 from "./assets/us/3.jpeg";
+import image4 from "./assets/us/4.jpeg";
+// import image5 from "./assets/us/5.jpeg";
+// import image6 from "./assets/us/6.jpeg";
 import video from "./assets/venue-shots.mp4";
 import Section from "./components/Section";
 
 const App = () => {
   const [shouldNavAnimate, setShouldNavAnimate] = useState(true);
+  const [hasSubmitted, setHasSubmitted] = useState(
+    localStorage.getItem("submitted") === "true"
+  );
   const navRef = useRef(null);
 
   const isNotMobile = window.innerWidth > 800;
@@ -48,14 +59,24 @@ const App = () => {
     if (!e.target) return;
     const formData = new FormData(e.target as HTMLFormElement);
 
-    await fetch(
-      "https://script.google.com/macros/s/AKfycbwlWpzbVS_-wDiRUGYdkgswwzOgf0URLbjbl5ok765HWdW7zvobKU9IxXUYKr2pJEC7/exec",
-      {
-        method: "POST",
-        body: formData,
-        mode: 'no-cors',
-      }
-    );
+    try {
+      await fetch(
+        "https://script.google.com/macros/s/AKfycbwlWpzbVS_-wDiRUGYdkgswwzOgf0URLbjbl5ok765HWdW7zvobKU9IxXUYKr2pJEC7/exec",
+        {
+          method: "POST",
+          body: formData,
+          mode: "no-cors",
+        }
+      );
+
+      localStorage.setItem("submitted", "true");
+      setHasSubmitted(true);
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (_e) {
+      window.alert(
+        "There was an error submitting your RSVP, sorry! Hit me up directly on Whatsapp"
+      );
+    }
   };
 
   return (
@@ -131,27 +152,85 @@ const App = () => {
             <p className="my-4">
               Please join us for our wedding celebration on
             </p>
-            <p className="text-xl mb-8 font-bold">10 September, 2025</p>
+            <p className="text-xl mb-8 font-bold">
+              Wednesday 10th September, 2025
+            </p>
+            <div className="flex flex-wrap justify-center">
+            <img
+              src={image1}
+              style={{ maxHeight: "300px" }}
+              alt="wedding day timeline"
+            />
+            <img
+              src={image2}
+              style={{ maxHeight: "300px" }}
+              alt="wedding day timeline"
+            />
+            <img
+              src={image3}
+              style={{ maxHeight: "300px" }}
+              alt="wedding day timeline"
+            />
+            <img
+              src={image4}
+              style={{ maxHeight: "300px" }}
+              alt="wedding day timeline"
+            />
+            </div>
           </div>
         </Section>
         <Section backgroundColour="white" id="rsvp">
           <div className="flex flex-col items-center">
             <h1 className="text-5xl">RSVP</h1>
             <p className="my-4">Please RSVP by 1st August 2025</p>
-            <form className="flex flex-col w-[700px]" onSubmit={onSubmit}>
-              <label htmlFor="name">Name</label>
-              <input type="text" id="name" name="name" />
-              <label htmlFor="email">Email</label>
-              <input type="email" id="email" name="email" />
-              <label htmlFor="attending">Attending</label>
-              <select id="attending" name="attendence">
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
-              </select>
-              <label htmlFor="dietary-requirements">Dietary Requirements</label>
-              <input type="text" id="dietary-requirements" name="dietary" />
-              <button type="submit">Submit</button>
-            </form>
+
+            {!hasSubmitted ? (
+              <form
+                className="flex flex-col w-full md:w-[700px] px-4 mt-12"
+                onSubmit={onSubmit}
+              >
+                <label htmlFor="name">Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  className="border-2 rounded mb-4"
+                />
+                <label htmlFor="email">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  className="border-2 rounded mb-4"
+                />
+                <label htmlFor="attending">Attending</label>
+                <select
+                  id="attending"
+                  name="attendence"
+                  className="border-2 rounded mb-4"
+                >
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                </select>
+                <label htmlFor="dietary-requirements">
+                  Dietary Requirements
+                </label>
+                <input
+                  type="text"
+                  id="dietary-requirements"
+                  name="dietary"
+                  className="border-2 rounded mb-4"
+                />
+                <button
+                  type="submit"
+                  className="border-2 rounded bg-slate-100 mt-8"
+                >
+                  Submit
+                </button>
+              </form>
+            ) : (
+              <div>Thank you for submitting your RSVP</div>
+            )}
           </div>
         </Section>
         <section
@@ -159,6 +238,7 @@ const App = () => {
           style={{
             color: "white",
           }}
+          id="venue"
         >
           <video
             src={video}
@@ -173,30 +253,39 @@ const App = () => {
             }}
           />
         </section>
-        <Section backgroundColour="white" id="travel">
+        <Section backgroundColour="white" id="wedding-day">
+          <div className="flex flex-col items-center">
+            <h1 className="text-5xl">Wedding Day</h1>
+            <p className="my-4">
+              The wedding ceremony will take place at 3pm, so arrive from
+              2:30pm.
+            </p>
+            <p className="text-xl mb-8 font-bold">
+              Wednesday 10th September, 2025
+            </p>
+            <img
+              src={isNotMobile ? timeline : timlineMobile}
+              alt="wedding day timeline"
+            />
+          </div>
+        </Section>
+        <Section backgroundColour="#818763" id="travel">
           <div className="flex flex-col items-center">
             <h1 className="text-5xl mb-8">Travel</h1>
             <p className="text-xl font-bold">South Farm Royston</p>
             <p className="my-4">SG8 0HR</p>
             <p className="my-4">
               Royston Station 12 Mins Drive, Cambridge Station 26 Mins Drive,
-              Local Taxi's (Royston Taxis, Butlermeltax, Breeze Taxi's)
+              Local Taxi's (Royston Taxis, Butlermeltax, Breeze Taxi's, Panther
+              Taxis)
             </p>
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d95751.55330690488!2d-0.04342107034763032!3d52.13533638051545!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4877d513550fb831%3A0xc59912fbe908b2c2!2sSouth%20Farm!5e0!3m2!1sen!2suk!4v1734875817837!5m2!1sen!2suk"
-              width="600"
-              height="450"
               style={{ border: "0" }}
+              className="w-full h-[500px]"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
             ></iframe>
-          </div>
-        </Section>
-        <Section backgroundColour="#818763" id="wedding-day">
-          <div className="flex flex-col items-center">
-            <h1 className="text-5xl">Wedding Day</h1>
-            <p className="my-4">The wedding will take place at 2pm</p>
-            <p className="text-xl mb-8 font-bold">10 September, 2025</p>
           </div>
         </Section>
         <section className="h-screen w-full" />
