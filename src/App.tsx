@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import anime from "animejs/lib/anime.js";
 import hero from "./assets/hero.png";
 import heroMobile from "./assets/hero-mobile.png";
@@ -42,6 +42,24 @@ const App = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [navRef.current]);
+
+  const onSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    if (!e.target) return;
+    const formData = new FormData(e.target as HTMLFormElement);
+
+    await fetch(
+      "https://script.google.com/macros/s/AKfycbwUOn5Ea7kKOUJh-KSq0Ku6soq6hb4ScwjYin0VW8PJ1u7tmakArygIhEoBKIEPIpSK/exec",
+      {
+        method: "POST",
+        body: formData,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+  };
+
   return (
     <main className="overflow-hidden">
       <div className="flex flex-col items-center">
@@ -122,18 +140,18 @@ const App = () => {
           <div className="flex flex-col items-center">
             <h1 className="text-5xl">RSVP</h1>
             <p className="my-4">Please RSVP by 1st August 2025</p>
-            <form className="flex flex-col w-[700px]">
+            <form className="flex flex-col w-[700px]" onSubmit={onSubmit}>
               <label htmlFor="name">Name</label>
-              <input type="text" id="name" />
+              <input type="text" id="name" name="name" />
               <label htmlFor="email">Email</label>
-              <input type="email" id="email" />
+              <input type="email" id="email" name="email" />
               <label htmlFor="attending">Attending</label>
-              <select id="attending">
+              <select id="attending" name="attendance">
                 <option value="yes">Yes</option>
                 <option value="no">No</option>
               </select>
               <label htmlFor="dietary-requirements">Dietary Requirements</label>
-              <input type="text" id="dietary-requirements" />
+              <input type="text" id="dietary-requirements" name="dietry" />
               <button type="submit">Submit</button>
             </form>
           </div>
@@ -146,9 +164,10 @@ const App = () => {
         >
           <video
             src={video}
-            autoPlay
-            muted
-            loop
+            autoPlay={true}
+            muted={true}
+            loop={true}
+            playsInline={true}
             className="absolute top-1/2 left-1/2 w-full h-full"
             style={{
               objectFit: "cover",
