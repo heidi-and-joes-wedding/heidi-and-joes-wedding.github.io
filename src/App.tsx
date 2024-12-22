@@ -49,14 +49,11 @@ const App = () => {
     const formData = new FormData(e.target as HTMLFormElement);
 
     await fetch(
-      "https://script.google.com/macros/s/AKfycbyN22QtjlTTvy0VmbHkDlDGNLkKj2GXJVdzxlmAGTJ3Q718SwpJLGU1w5ioOiMjxwIs/exec",
+      "https://script.google.com/macros/s/AKfycbwlWpzbVS_-wDiRUGYdkgswwzOgf0URLbjbl5ok765HWdW7zvobKU9IxXUYKr2pJEC7/exec",
       {
         method: "POST",
         body: formData,
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
-        },
+        mode: 'no-cors',
       }
     );
   };
