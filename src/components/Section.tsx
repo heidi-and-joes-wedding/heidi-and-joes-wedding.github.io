@@ -11,7 +11,7 @@ const Section = ({
 }) => {
   return (
     <section
-      className='h-min-screen w-full pt-8 md:p-16'
+      className='min-h-screen w-full pt-8 md:p-16'
       style={{
         background: backgroundColour,
         color: backgroundColour === "white" ? "black" : "white",
