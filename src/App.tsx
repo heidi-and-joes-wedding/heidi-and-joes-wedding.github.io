@@ -151,7 +151,7 @@ const App = () => {
           className="w-full"
           id="home"
           style={{
-            height: isNotMobile ? window.innerHeight : window.innerHeight / 1.5,
+            height: isNotMobile ? window.innerHeight : window.innerHeight / 1.3,
           }}
         />
         <img
