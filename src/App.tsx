@@ -161,7 +161,7 @@ const App = () => {
           alt="hero"
           className="md:h-screen md:w-[1240px] fixed -z-10"
         />
-        <nav
+        {/* <nav
           className=" flex justify-between items-center w-full md:w-[800px] fixed h-12 mt-8 z-10 text-white rounded-t p-4"
           style={{
             background: "#818763",
@@ -175,7 +175,7 @@ const App = () => {
           <a href="#venue">Venue</a>
           <a href="#travel">Travel</a>
           <a href="#wedding-day">Wedding Day</a>
-        </nav>
+        </nav> */}
         <Section backgroundColour="#818763" id="home">
           <div className="flex flex-col items-center">
             <h1 className="text-3xl md:text-5xl font-bold">Heidi Freeman</h1>
