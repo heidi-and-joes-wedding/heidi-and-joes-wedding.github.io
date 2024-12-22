@@ -9,8 +9,8 @@ import image1 from "./assets/us/1.jpeg";
 import image2 from "./assets/us/2.jpeg";
 import image3 from "./assets/us/3.jpeg";
 import image4 from "./assets/us/4.jpeg";
-// import image5 from "./assets/us/5.jpeg";
-// import image6 from "./assets/us/6.jpeg";
+import image5 from "./assets/us/5.jpeg";
+import image6 from "./assets/us/6.jpeg";
 import video from "./assets/venue-shots.mp4";
 import Section from "./components/Section";
 
@@ -155,27 +155,73 @@ const App = () => {
             <p className="text-xl mb-8 font-bold">
               Wednesday 10th September, 2025
             </p>
-            <div className="flex flex-wrap justify-center">
-            <img
-              src={image1}
-              style={{ maxHeight: "300px" }}
-              alt="wedding day timeline"
-            />
-            <img
-              src={image2}
-              style={{ maxHeight: "300px" }}
-              alt="wedding day timeline"
-            />
-            <img
-              src={image3}
-              style={{ maxHeight: "300px" }}
-              alt="wedding day timeline"
-            />
-            <img
-              src={image4}
-              style={{ maxHeight: "300px" }}
-              alt="wedding day timeline"
-            />
+            <div className="w-full relative overflow-hidden flex flex-wrap justify-center gap-4">
+              <div className="w-[180px] h-[180px] md:w-[280px] md:h-[280px] relative overflow-hidden rounded-full">
+                <img
+                  src={image6}
+                  alt="wedding day timeline"
+                  className="absolute top-1/2 left-1/2 w-full h-full"
+                  style={{
+                    objectFit: "cover",
+                    transform: "translate(-50%, -50%)",
+                  }}
+                />
+              </div>
+              <div className="w-[180px] h-[180px] md:w-[280px] md:h-[280px] relative overflow-hidden rounded-full">
+                <img
+                  src={image2}
+                  className="absolute top-1/2 left-1/2 w-full h-full"
+                  style={{
+                    objectFit: "cover",
+                    transform: "translate(-50%, -50%)",
+                  }}
+                  alt="wedding day timeline"
+                />
+              </div>
+              <div className="w-[180px] h-[180px] md:w-[280px] md:h-[280px] relative overflow-hidden rounded-full">
+                <img
+                  src={image3}
+                  alt="wedding day timeline"
+                  className="absolute top-1/2 left-1/2 w-full h-full"
+                  style={{
+                    objectFit: "cover",
+                    transform: "translate(-50%, -50%)",
+                  }}
+                />
+              </div>
+              <div className="w-[180px] h-[180px] md:w-[280px] md:h-[280px] relative overflow-hidden rounded-full">
+                <img
+                  src={image4}
+                  alt="wedding day timeline"
+                  className="absolute top-1/2 left-1/2 w-full h-full"
+                  style={{
+                    objectFit: "cover",
+                    transform: "translate(-50%, -50%)",
+                  }}
+                />
+              </div>
+              <div className="w-[180px] h-[180px] md:w-[280px] md:h-[280px] relative overflow-hidden rounded-full">
+                <img
+                  src={image5}
+                  alt="wedding day timeline"
+                  className="absolute top-1/2 left-1/2 w-full h-full"
+                  style={{
+                    objectFit: "cover",
+                    transform: "translate(-50%, -50%)",
+                  }}
+                />
+              </div>
+              <div className="w-[180px] h-[180px] md:w-[280px] md:h-[280px] relative overflow-hidden rounded-full">
+                <img
+                  src={image1}
+                  alt="wedding day timeline"
+                  className="absolute top-1/2 left-1/2 w-full h-full"
+                  style={{
+                    objectFit: "cover",
+                    transform: "translate(-50%, -50%)",
+                  }}
+                />
+              </div>
             </div>
           </div>
         </Section>
@@ -254,7 +300,7 @@ const App = () => {
           />
         </section>
         <Section backgroundColour="white" id="wedding-day">
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-center m-4">
             <h1 className="text-5xl">Wedding Day</h1>
             <p className="my-4">
               The wedding ceremony will take place at 3pm, so arrive from
@@ -270,7 +316,7 @@ const App = () => {
           </div>
         </Section>
         <Section backgroundColour="#818763" id="travel">
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-center m-4">
             <h1 className="text-5xl mb-8">Travel</h1>
             <p className="text-xl font-bold">South Farm Royston</p>
             <p className="my-4">SG8 0HR</p>
