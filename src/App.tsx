@@ -19,9 +19,10 @@ const App = () => {
   const [hasSubmitted, setHasSubmitted] = useState(
     localStorage.getItem("submitted") === "true"
   );
+  const [isNotMobile, setIsNotMobile] = useState(
+    window.innerWidth > 800
+  );
   const navRef = useRef(null);
-
-  const isNotMobile = window.innerWidth > 800;
 
   useEffect(() => {
     if (navRef.current === null) return;
@@ -47,10 +48,22 @@ const App = () => {
       }
     };
 
+    const handleResize = () => {
+      if(window.innerWidth > 800){
+        setIsNotMobile(true)
+      }
+      if(window.innerWidth < 800){
+        setIsNotMobile(false)
+      }
+    }
+
+    window.addEventListener('resize', handleResize)
+
     window.addEventListener("scroll", handleScroll);
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener('resize', handleResize)
     };
   }, [navRef.current]);
 
@@ -146,9 +159,9 @@ const App = () => {
         </nav>
         <Section backgroundColour="#818763" id="home">
           <div className="flex flex-col items-center">
-            <h1 className="text-5xl">Heidi Freeman</h1>
-            <h1 className="text-3xl">and</h1>
-            <h1 className="text-5xl">Joe Milne</h1>
+            <h1 className="text-3xl md:text-5xl font-bold">Heidi Freeman</h1>
+            <h1 className="text-xl md:text-3xl">and</h1>
+            <h1 className="text-3xl md:text-5xl font-bold">Joe Milne</h1>
             <p className="my-4">
               Please join us for our wedding celebration on
             </p>
@@ -158,6 +171,7 @@ const App = () => {
             <div className="w-full relative overflow-hidden flex flex-wrap justify-center gap-4 mb-8">
               <div className="w-[180px] h-[180px] md:w-[280px] md:h-[280px] relative overflow-hidden rounded-full">
                 <img
+                  loading="lazy"
                   src={image6}
                   alt="wedding day timeline"
                   className="absolute top-1/2 left-1/2 w-full h-full"
@@ -169,6 +183,7 @@ const App = () => {
               </div>
               <div className="w-[180px] h-[180px] md:w-[280px] md:h-[280px] relative overflow-hidden rounded-full">
                 <img
+                  loading="lazy"
                   src={image2}
                   className="absolute top-1/2 left-1/2 w-full h-full"
                   style={{
@@ -180,6 +195,7 @@ const App = () => {
               </div>
               <div className="w-[180px] h-[180px] md:w-[280px] md:h-[280px] relative overflow-hidden rounded-full">
                 <img
+                  loading="lazy"
                   src={image3}
                   alt="wedding day timeline"
                   className="absolute top-1/2 left-1/2 w-full h-full"
@@ -191,6 +207,7 @@ const App = () => {
               </div>
               <div className="w-[180px] h-[180px] md:w-[280px] md:h-[280px] relative overflow-hidden rounded-full">
                 <img
+                  loading="lazy"
                   src={image4}
                   alt="wedding day timeline"
                   className="absolute top-1/2 left-1/2 w-full h-full"
@@ -202,6 +219,7 @@ const App = () => {
               </div>
               <div className="w-[180px] h-[180px] md:w-[280px] md:h-[280px] relative overflow-hidden rounded-full">
                 <img
+                  loading="lazy"
                   src={image5}
                   alt="wedding day timeline"
                   className="absolute top-1/2 left-1/2 w-full h-full"
@@ -213,6 +231,7 @@ const App = () => {
               </div>
               <div className="w-[180px] h-[180px] md:w-[280px] md:h-[280px] relative overflow-hidden rounded-full">
                 <img
+                  loading="lazy"
                   src={image1}
                   alt="wedding day timeline"
                   className="absolute top-1/2 left-1/2 w-full h-full"
@@ -227,7 +246,7 @@ const App = () => {
         </Section>
         <Section backgroundColour="white" id="rsvp">
           <div className="flex flex-col items-center">
-            <h1 className="text-5xl">RSVP</h1>
+            <h1 className="text-3xl md:text-5xl font-bold">RSVP</h1>
             <p className="my-4">Please RSVP by 1st August 2025</p>
 
             {!hasSubmitted ? (
@@ -240,6 +259,7 @@ const App = () => {
                   type="text"
                   id="name"
                   name="name"
+                  required
                   className="border-2 rounded mb-4"
                 />
                 <label htmlFor="email">Email</label>
@@ -247,12 +267,14 @@ const App = () => {
                   type="email"
                   id="email"
                   name="email"
+                  required
                   className="border-2 rounded mb-4"
                 />
                 <label htmlFor="attending">Attending</label>
                 <select
                   id="attending"
                   name="attendence"
+                  required
                   className="border-2 rounded mb-4"
                 >
                   <option value="yes">Yes</option>
@@ -265,11 +287,12 @@ const App = () => {
                   type="text"
                   id="dietary-requirements"
                   name="dietary"
+                  placeholder="eg. Gluten free, Vegan"
                   className="border-2 rounded mb-4"
                 />
                 <button
                   type="submit"
-                  className="border-2 rounded bg-slate-100 mt-8"
+                  className="border-2 rounded bg-slate-100 mt-8 h-10"
                 >
                   Submit
                 </button>
@@ -286,6 +309,9 @@ const App = () => {
           }}
           id="venue"
         >
+           <div className="relative z-10 flex flex-col items-center pt-12 opacity-60">
+          <h1 className="text-3xl md:text-5xl font-bold">Venue</h1>
+          </div>
           <video
             src={video}
             autoPlay={true}
@@ -297,11 +323,13 @@ const App = () => {
               objectFit: "cover",
               transform: "translate(-50%, -50%)",
             }}
-          />
+          >
+            
+          </video>
         </section>
         <Section backgroundColour="white" id="wedding-day">
           <div className="flex flex-col items-center m-4">
-            <h1 className="text-5xl">Wedding Day</h1>
+            <h1 className="text-3xl md:text-5xl font-bold">Wedding Day</h1>
             <p className="my-4">
               The wedding ceremony will take place at 3pm, so arrive from
               2:30pm.
@@ -310,6 +338,7 @@ const App = () => {
               Wednesday 10th September, 2025
             </p>
             <img
+              loading="lazy"
               src={isNotMobile ? timeline : timlineMobile}
               alt="wedding day timeline"
             />
@@ -317,7 +346,7 @@ const App = () => {
         </Section>
         <Section backgroundColour="#818763" id="travel">
           <div className="flex flex-col items-center m-4">
-            <h1 className="text-5xl mb-8">Travel</h1>
+            <h1 className="text-3xl md:text-5xl font-bold mb-8">Travel</h1>
             <p className="text-xl font-bold">South Farm Royston</p>
             <p className="my-4">SG8 0HR</p>
             <p className="my-4">
@@ -332,6 +361,9 @@ const App = () => {
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
             ></iframe>
+            <p className="m-4">
+              We have limited accomodation at the venue, so we recommend staying locally. Or in Royston or Cambridge. 
+            </p>
           </div>
         </Section>
         <section className="h-screen w-full" />
