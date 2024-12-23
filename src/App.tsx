@@ -121,7 +121,7 @@ const App = () => {
         <img
           src={flowerBanner}
           alt="flower-banner"
-          className="w-[80%] absolute z-20 top-[42%] left-[54%]"
+          className="w-[80%] absolute z-20 top-[42%] left-[52%] md:left-[54%]"
           style={{ transform: "rotate(90deg)" }}
         />
         <img
@@ -136,7 +136,7 @@ const App = () => {
             <img
               src={flowerBanner}
               alt="flower-banner"
-              className="w-[80%] absolute z-20 top-[12%] left-[54%]"
+              className="w-[80%] absolute z-20 top-[12%] left-[52%] md:left-[54%]"
               style={{ transform: "rotate(90deg)" }}
             />
             <img
@@ -151,7 +151,7 @@ const App = () => {
           className="w-full"
           id="home"
           style={{
-            height: isNotMobile ? window.innerHeight : window.innerHeight / 1.3,
+            height: isNotMobile ? window.innerHeight : window.innerHeight / 1.4,
           }}
         />
         <img
@@ -281,7 +281,7 @@ const App = () => {
                   id="name"
                   name="name"
                   required
-                  className="border-2 rounded mb-4"
+                  className="border-2 rounded mb-4 p-2"
                 />
                 <label htmlFor="email">Email</label>
                 <input
@@ -289,14 +289,14 @@ const App = () => {
                   id="email"
                   name="email"
                   required
-                  className="border-2 rounded mb-4"
+                  className="border-2 rounded mb-4 p-2"
                 />
                 <label htmlFor="attending">Attending</label>
                 <select
                   id="attending"
                   name="attendence"
                   required
-                  className="border-2 rounded mb-4"
+                  className="border-2 rounded mb-4 p-1"
                 >
                   <option value="yes">Yes</option>
                   <option value="no">No</option>
@@ -309,7 +309,7 @@ const App = () => {
                   id="dietary-requirements"
                   name="dietary"
                   placeholder="eg. Gluten free, Vegan"
-                  className="border-2 rounded mb-4"
+                  className="border-2 rounded mb-4 p-2"
                 />
                 <button
                   type="submit"
@@ -347,7 +347,7 @@ const App = () => {
           ></video>
         </section>
         <Section backgroundColour="white" id="wedding-day">
-          <div className="flex flex-col items-center m-4">
+          <div className="flex flex-col items-center m-8">
             <h1 className="text-3xl md:text-5xl font-bold">Wedding Day</h1>
             <p className="my-4">
               The wedding ceremony will take place at 3pm, so arrive from
@@ -371,7 +371,7 @@ const App = () => {
           </div>
         </Section>
         <Section backgroundColour="#818763" id="travel">
-          <div className="flex flex-col items-center m-4">
+          <div className="flex flex-col items-center m-8">
             <h1 className="text-3xl md:text-5xl font-bold mb-8">Travel</h1>
             <p className="text-xl font-bold">South Farm Royston</p>
             <p className="my-4">SG8 0HR</p>
