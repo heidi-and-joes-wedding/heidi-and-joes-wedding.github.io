@@ -1,6 +1,5 @@
 import { FormEvent, useEffect, useState } from "react";
 import Intro from "./components/Intro";
-//import anime from "animejs/lib/anime.js";
 import hero from "./assets/hero.png";
 import heroMobile from "./assets/hero-mobile.png";
 import flowerBanner from "./assets/flower-banner.png";
@@ -36,7 +35,6 @@ function getCountdown(targetDate: string) {
 }
 
 const App = () => {
-  //const [shouldNavAnimate, setShouldNavAnimate] = useState(true);
   const queryParams = new URLSearchParams(window.location.search);
   const guest = queryParams.get("guest");
   const [hasSubmitted, setHasSubmitted] = useState(
@@ -47,28 +45,6 @@ const App = () => {
   const countdown = getCountdown("2025-09-10");
 
   useEffect(() => {
-    // const navAnimation = anime({
-    //   targets: navRef.current,
-    //   easing: "cubicBezier(0.2, 0, 0, 1)",
-    //   translateY: window.innerHeight - 80,
-    //   duration: 400,
-    //   delay: function (_el, i) {
-    //     return i * 100;
-    //   },
-    //   autoplay: false,
-    // });
-
-    // const handleScroll = () => {
-    //   if (
-    //     ((isNotMobile && window.scrollY > window.innerHeight) ||
-    //       (!isNotMobile && window.scrollY > window.innerHeight / 2)) &&
-    //     shouldNavAnimate
-    //   ) {
-    //     navAnimation.play();
-    //     setShouldNavAnimate(false);
-    //   }
-    // };
-
     const handleResize = () => {
       if (window.innerWidth > 800) {
         setIsNotMobile(true);
@@ -80,10 +56,7 @@ const App = () => {
 
     window.addEventListener("resize", handleResize);
 
-    //window.addEventListener("scroll", handleScroll);
-
     return () => {
-      //window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", handleResize);
     };
   }, []);
@@ -167,21 +140,6 @@ const App = () => {
           alt="hero"
           className="md:h-screen md:w-[1240px] fixed -z-10"
         />
-        {/* <nav
-          className=" flex justify-between items-center w-full md:w-[800px] fixed h-12 mt-8 z-10 text-white rounded-t p-4"
-          style={{
-            background: "#818763",
-            opacity: 0.8,
-            transform: "translateY(-100px)",
-          }}
-          ref={navRef}
-        >
-          <a href="#home">Home</a>
-          <a href="#rsvp">RSVP</a>
-          <a href="#venue">Venue</a>
-          <a href="#travel">Travel</a>
-          <a href="#wedding-day">Wedding Day</a>
-        </nav> */}
         <Section backgroundColour="#818763" id="home">
           <div className="flex flex-col items-center">
             <h1 className="text-3xl md:text-5xl font-bold">Heidi Freeman</h1>
