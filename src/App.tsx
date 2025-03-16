@@ -1,4 +1,5 @@
 import { FormEvent, useEffect, useState } from "react";
+import Intro from "./components/Intro";
 //import anime from "animejs/lib/anime.js";
 import hero from "./assets/hero.png";
 import heroMobile from "./assets/hero-mobile.png";
@@ -36,9 +37,12 @@ function getCountdown(targetDate: string) {
 
 const App = () => {
   //const [shouldNavAnimate, setShouldNavAnimate] = useState(true);
+  const queryParams = new URLSearchParams(window.location.search);
+  const guest = queryParams.get("guest");
   const [hasSubmitted, setHasSubmitted] = useState(
     localStorage.getItem("submitted") === "true"
   );
+  const [isLoading, setIsLoading] = useState(false);
   const [isNotMobile, setIsNotMobile] = useState(window.innerWidth > 800);
   const countdown = getCountdown("2025-09-10");
 
@@ -87,6 +91,8 @@ const App = () => {
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (!e.target) return;
+
+    setIsLoading(true);
     const formData = new FormData(e.target as HTMLFormElement);
 
     try {
@@ -101,6 +107,7 @@ const App = () => {
 
       localStorage.setItem("submitted", "true");
       setHasSubmitted(true);
+      setIsLoading(false);
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (_e) {
       window.alert(
@@ -111,6 +118,7 @@ const App = () => {
 
   return (
     <main className="overflow-hidden">
+      <Intro guest={guest} />
       <div className="flex flex-col items-center">
         <img
           src={flowerBanner}
@@ -259,10 +267,10 @@ const App = () => {
                 />
               </div>
             </div>
-              <p className="text-xl mb-8">
-                <span className="font-bold">{countdown.months}</span> months and{" "}
-                <span className="font-bold">{countdown.days}</span> days.
-              </p>
+            <p className="text-xl mb-8">
+              <span className="font-bold">{countdown.months}</span> months and{" "}
+              <span className="font-bold">{countdown.days}</span> days.
+            </p>
           </div>
         </Section>
         <Section backgroundColour="white" id="rsvp">
@@ -314,8 +322,12 @@ const App = () => {
                 <button
                   type="submit"
                   className="border-2 rounded bg-slate-100 mt-8 h-10"
+                  style={{
+                    backgroundColor: isLoading ? "rgb(241 245 249 /0.2)" : "",
+                  }}
+                  disabled={isLoading}
                 >
-                  Submit
+                  {isLoading ? "Loading" : "Submit"}
                 </button>
               </form>
             ) : (
@@ -350,8 +362,7 @@ const App = () => {
           <div className="flex flex-col items-center m-8">
             <h1 className="text-3xl md:text-5xl font-bold">Wedding Day</h1>
             <p className="my-4">
-              The wedding ceremony will take place at 3pm, so arrive from
-              2:30pm.
+              The wedding ceremony will take place at 3pm, so arrive by 2:30pm.
             </p>
             <p className="text-xl mb-8 font-bold">
               Wednesday 10th September, 2025
@@ -360,14 +371,18 @@ const App = () => {
               loading="lazy"
               src={isNotMobile ? timeline : timlineMobile}
               alt="wedding day timeline"
+              className="mb-4"
             />
             <p>
               Unfortunately no children or pets will be able to attend unless
               expressly permitted.
             </p>
             <h2 className="text-2xl md:text-3xl mt-8">Dress code</h2>
-            <p>Gentlemen will wear summer suits, neckwear optional.</p>
-            <p>Ladies will wear summer dresses.</p>
+            <p>
+              Gentlemen will wear summer suits, neckwear optional (dickie bows
+              encouraged!).
+            </p>
+            <p>Ladies will wear smart summer atire.</p>
           </div>
         </Section>
         <Section backgroundColour="#818763" id="travel">
@@ -375,11 +390,49 @@ const App = () => {
             <h1 className="text-3xl md:text-5xl font-bold mb-8">Travel</h1>
             <p className="text-xl font-bold">South Farm Royston</p>
             <p className="my-4">SG8 0HR</p>
-            <p className="my-4">
-              Royston Station 12 Mins Drive, Cambridge Station 26 Mins Drive,
-              Local Taxi's (Royston Taxis, Butlermeltax, Breeze Taxi's, Panther
-              Taxis)
-            </p>
+            <div>
+              <p className="my-2">Royston Station 12 Mins Drive,</p>
+              <p className="my-2">Cambridge Station 26 Mins Drive,</p>
+              <p className="my-2">
+                Local Taxi's (
+                <a
+                  className="underline font-medium"
+                  target="_blank"
+                  rel="noopener"
+                  href="https://www.roystontaxis.co.uk"
+                >
+                  Royston Taxis
+                </a>
+                ,{" "}
+                <a
+                  className="underline font-medium"
+                  target="_blank"
+                  rel="noopener"
+                  href="https://butlermeltax.co.uk"
+                >
+                  Butlermeltax
+                </a>
+                ,{" "}
+                <a
+                  className="underline font-medium"
+                  target="_blank"
+                  rel="noopener"
+                  href="https://breezetaxis.com/royston-taxi-service?gad_source=1&gbraid=0AAAAApWvUhtaGM1C-otul4uo9TwxmQRmj"
+                >
+                  Breeze Taxi's
+                </a>
+                ,{" "}
+                <a
+                  className="underline font-medium"
+                  target="_blank"
+                  rel="noopener"
+                  href="https://www.panthertaxis.co.uk"
+                >
+                  Panther Taxis
+                </a>
+                )
+              </p>
+            </div>
             <p className="my-4">
               Should you choose to drive there is ample parking on site.
             </p>
@@ -391,8 +444,16 @@ const App = () => {
               referrerPolicy="no-referrer-when-downgrade"
             ></iframe>
             <p className="m-4">
-              We have limited accomodation at the venue, so we recommend staying
-              locally. Or in Royston or Cambridge.
+              As accommodation at the venue is limited, we recommend staying
+              nearby in Royston or Cambridge.{" "}
+              <a
+                className="underline font-medium"
+                target="_blank"
+                rel="noopener"
+                href="https://south-farm.co.uk/suppliers/accommodation/"
+              >
+                Click here for some options
+              </a>
             </p>
           </div>
         </Section>
