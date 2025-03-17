@@ -336,11 +336,13 @@ const App = () => {
               expressly permitted.
             </p>
             <h2 className="text-2xl md:text-3xl mt-8">Dress code</h2>
-            <p>
-              Gentlemen will wear summer suits, neckwear optional (dickie bows
-              encouraged!).
-            </p>
-            <p>Ladies will wear smart summer atire.</p>
+            <div className="">
+              <p>
+                Gentlemen will wear summer suits, neckwear optional (dickie bows
+                encouraged!).
+              </p>
+              <p className="mt-2">Ladies will wear smart summer atire.</p>
+            </div>
           </div>
         </Section>
         <Section backgroundColour="#818763" id="travel">
@@ -401,7 +403,7 @@ const App = () => {
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
             ></iframe>
-            <p className="m-4">
+            <p className="my-4">
               As accommodation at the venue is limited, we recommend staying
               nearby in Royston or Cambridge.{" "}
               <a
@@ -411,6 +413,27 @@ const App = () => {
                 href="https://south-farm.co.uk/suppliers/accommodation/"
               >
                 Click here for some options
+              </a>
+            </p>
+          </div>
+        </Section>
+        <Section backgroundColour="white" id="gifting">
+          <div className="flex flex-col items-center m-8">
+            <h1 className="text-3xl md:text-5xl font-bold mb-8">Gifting</h1>
+            <p className="m-4">
+              "Having you celebrate with us is the best gift we could ask for,
+              but if you’d like to contribute towards our honeymoon, we’d be
+              forever grateful" - Heidi's lovely way of putting it.
+            </p>
+            <p className="m-4 flex flex-col">
+              "Pressy please?" - Me
+              <a
+                className="underline font-medium mt-4"
+                target="_blank"
+                rel="noopener"
+                href="https://prezola.com/buy/view/235252"
+              >
+                Click here anyway if you want... or don't, all good.
               </a>
             </p>
           </div>
