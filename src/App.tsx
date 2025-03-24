@@ -420,22 +420,24 @@ const App = () => {
         <Section backgroundColour="white" id="gifting">
           <div className="flex flex-col items-center m-8">
             <h1 className="text-3xl md:text-5xl font-bold mb-8">Gifting</h1>
-            <p className="m-4">
-              "Having you celebrate with us is the best gift we could ask for,
-              but if you’d like to contribute towards our honeymoon, we’d be
-              forever grateful" - Heidi's lovely way of putting it.
-            </p>
-            <p className="m-4 flex flex-col">
-              "Pressy please?" - Me
-              <a
-                className="underline font-medium mt-4"
-                target="_blank"
-                rel="noopener"
-                href="https://prezola.com/buy/view/235252"
-              >
-                Click here anyway if you want... or don't, all good.
-              </a>
-            </p>
+            <div>
+              <p className="m-4">
+                "Having you celebrate with us is the best gift we could ask for,
+                but if you’d like to contribute towards our honeymoon, we’d be
+                forever grateful" - Heidi's lovely way of putting it.
+              </p>
+              <p className="m-4 flex flex-col">
+                "Pressy please?" - Me
+                <a
+                  className="underline font-medium mt-4"
+                  target="_blank"
+                  rel="noopener"
+                  href="https://prezola.com/buy/view/235252"
+                >
+                  Click here anyway if you want... or don't, all good.
+                </a>
+              </p>
+            </div>
           </div>
         </Section>
         <section className="h-screen w-full" />
